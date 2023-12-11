@@ -23,22 +23,30 @@ int main(){
         }
         sort(v2.begin(),v2.end());
         for(int i=0;i<n;i++){
+            if(v2[i].first==a[v2[i].second]){
+                c[v2[i].second]=1;
+                continue;
+            }
+            if(v2[i].first<a[v2[i].second]){
+                f=1;
+                break;
+            }
             f=1;
-            for(int j=v2[i].second;j<n;j++){
+            for(int j=v2[i].second+1;j<n;j++){
                 if(a[j]==v2[i].first){
                     f=0;
                     c[v2[i].second]=1;
-                    a[v2[i].second]=v2[i].first;
+                    for(int k=j;k>=v2[i].second;k--) a[k]=v2[i].first;
                     break;
                 }
                 if(a[j]>v2[i].first || c[j]==1) break;
             }
             if(f==1){
-                for(int j=v2[i].second;j>=0;j--){
+                for(int j=v2[i].second-1;j>=0;j--){
                     if(a[j]==v2[i].first){
                         f=0;
                         c[v2[i].second]=1;
-                        a[v2[i].second]=v2[i].first;
+                        for(int k=j;k<=v2[i].second;k++) a[k]=v2[i].first;
                         break;
                     }
                     if(a[j]>v2[i].first || c[j]==1) break;
