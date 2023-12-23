@@ -2,6 +2,8 @@
     "files.associations": {
         "vector": "cpp",
         "string.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "algorithm": "cpp",
+        "map": "cpp"
     }
 }
