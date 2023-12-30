@@ -17,7 +17,7 @@ int main(){
         sort(v.begin(),v.end());
         sort(v2.begin(),v2.end());
         for(int i=0;i<n;i++){
-            sum+=upper_bound(v2.begin(),v2.end(),v[i].second)-v2.begin()-1;
+            sum+=lower_bound(v2.begin(),v2.end(),v[i].second)-v2.begin();
             v2.erase(lower_bound(v2.begin(),v2.end(),v[i].second));
         }
         printf("%lld\n",sum);

@@ -4,7 +4,8 @@
         "string.h": "c",
         "stdio.h": "c",
         "algorithm": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "ostream": "cpp"
     },
     "C_Cpp.errorSquiggles": "enabled"
 }
