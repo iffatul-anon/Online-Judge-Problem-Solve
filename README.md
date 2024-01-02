@@ -4,7 +4,7 @@
 | -- | -------- | ----------- | ----- |
 | Codeforces | [iffatul_anon](https://codeforces.com/profile/iffatul_anon)| 1345 (Pupil) | [1001](https://github.com/iffatul-anon/CodeForces) |
 | CodeChef | [iffatulanon](https://www.codechef.com/users/iffatulanon) | 1569 (2 star) | [46](https://github.com/iffatul-anon/CodeChef) |
-| AtCoder | [iffatul_anon](https://atcoder.jp/users/iffatul_anon) | 556 | 76 |
+| AtCoder | [iffatul_anon](https://atcoder.jp/users/iffatul_anon) | 556 (8 Kyu) | 76 |
 | LeetCode | [iffatul_anon](https://leetcode.com/iffatul_anon/) |  | 9 |
 | LightOJ | [iffatul_anon](https://lightoj.com/user/iffatul_anon) |  | 22 |
 | SPOJ | [iffatul_anon](https://www.spoj.com/myaccount/) |  | 1 |  
