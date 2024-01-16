@@ -2,7 +2,7 @@
 
 | OJ | Username | Max Ratting | Solve |
 | -- | -------- | ----------- | ----- |
-| Codeforces | [iffatul_anon](https://codeforces.com/profile/iffatul_anon)| 1345 (Pupil) | [1001](https://github.com/iffatul-anon/CodeForces) |
+| Codeforces | [iffatul_anon](https://codeforces.com/profile/iffatul_anon)| 1345 (Pupil) | [1001](https://github.com/iffatul-anon/Online-Judge-Problem-Solve/tree/main/CodeForces) |
 | CodeChef | [iffatulanon](https://www.codechef.com/users/iffatulanon) | 1569 (2 star) | [46](https://github.com/iffatul-anon/CodeChef) |
 | AtCoder | [iffatul_anon](https://atcoder.jp/users/iffatul_anon) | 556 (8 Kyu) | 76 |
 | LeetCode | [iffatul_anon](https://leetcode.com/iffatul_anon/) |  | 9 |
