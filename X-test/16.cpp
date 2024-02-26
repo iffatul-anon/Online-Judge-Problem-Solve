@@ -1,6 +1,5 @@
-#pragma GCC optimize("Ofast,unroll-loops")
-#pragma GCC target("avx,avx2,fma")
-#include<bits/stdc++.h>
+#include<iostream>
+#include<algorithm>
 using namespace std;
 int main(){
     int t;

@@ -5,7 +5,9 @@
         "stdio.h": "c",
         "algorithm": "cpp",
         "map": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "limits": "cpp",
+        "ratio": "cpp"
     },
     "C_Cpp.errorSquiggles": "enabled"
 }
