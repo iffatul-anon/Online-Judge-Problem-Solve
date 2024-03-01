@@ -20,6 +20,18 @@ int main(){
     int t;
     scanf("%d",&t);
     for(int i=1;i<=t;i++){
-        
+        int a,b,c,gcd,div=1;
+        scanf("%d %d",&a,&b);
+        gcd=GCD(a,b);
+        for(int i=0;i<ind && p[i]*p[i]<=gcd;i++){
+            c=0;
+            while(gcd%p[i]==0){
+                c++;
+                gcd/=p[i];
+            }
+            if(c>0) div*=c+1;
+        }
+        if(gcd>1) div*=2;
+        printf("%d\n",div);
     }
 }
