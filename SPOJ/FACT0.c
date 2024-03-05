@@ -14,5 +14,19 @@ void sieve(){
 }
 int main(){
     sieve();
-    
+    while(1){
+        long long n,c,j;
+        scanf("%lld",&n);
+        if(n==0) return 0;
+        for(j=0;p[j]*p[j]<=n;j++){
+            c=0;
+            while(n%p[j]==0){
+                c++;
+                n/=p[j];
+            }
+            if(c>0) printf("%lld^%lld ",p[j],c);
+        }
+        if(n>1) printf("%lld^1",n);
+        printf("\n");
+    }
 }

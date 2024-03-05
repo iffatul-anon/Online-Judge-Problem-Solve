@@ -1,7 +1,4 @@
-#include<iostream>
-#include<algorithm>
-#include<vector>
-using namespace std;
+#include<stdio.h>
 long long a[1000005]={0}, p[1000005],ind=0;
 void sieve(){
     p[ind++]=2;
@@ -15,28 +12,23 @@ void sieve(){
         }
     }
 }
-vector<pair<int,int> > fact(1000001);
-void factor(){
-    int x,c,f;
-    for(int i=1;i<=1000000;i++){
-        c=0;
-        x=i;
-        for(int j=0;p[j]*p[j]<=i;j++){
-            f=0;
-            while(x%p[j]==0){
-                f=1;
-                x/=p[j];
-            }
-            if(f) c++;
-        }
-        if(x>1) c++;
-        fact[i].first=c;
-        fact[i].second=i;
-    }
-    sort(fact.begin(),fact.end());
-}
 int main(){
     sieve();
-    factor();
-    
+    int a,b,n,div,c=0,x,d=0;
+    scanf("%d %d %d",&a,&b,&n);
+    for(int i=a;i<=b;i++){
+        div=1;
+        x=i;
+        for(int j=0;p[j]*p[j]<=i;j++){
+            c=0;
+            while(x%p[j]==0){
+                c++;
+                x/=p[j];
+            }
+            if(c>0) div*=c+1;
+        }
+        if(x>1) div*=2;
+        if(div==n) d++;
+    }
+    printf("%d\n",d);
 }

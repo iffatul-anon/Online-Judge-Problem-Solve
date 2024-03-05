@@ -18,8 +18,8 @@ int main(){
     int t;
     scanf("%d",&t);
     while(t--){
-        long long n,x,y,sum=1,i,m;
-        scanf("%lld",&n);
+        unsigned long n,x,y,sum=1,i,m;
+        scanf("%llu",&n);
         m=n;
         for(i=0;i<ind && p[i]*p[i]<=n;i++){
             x=p[i];
@@ -31,6 +31,7 @@ int main(){
             sum=sum*((x-1)/(y-1));
         }
         if(n>1) sum=sum*(n+1);
-        printf("%lld\n",sum-m);
+        //if(n>1) sum=sum*(((n*n)-1)/(n-1)); // overflow
+        printf("%llu\n",sum-m);
     }
 } 

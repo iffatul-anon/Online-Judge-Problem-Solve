@@ -8,5 +8,9 @@ long long LCM(long long n1, long long n2){
 }
 using namespace std;
 int main(){
-     
+    int t;
+    scanf("%d",&t);
+    while(t--){
+        
+    }
 }
