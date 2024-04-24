@@ -48,5 +48,9 @@ int main(){
     factor();
     int t;
     scanf("%d",&t);
-    
+    for(int j=1;j<=t;j++){
+        int n;
+        scanf("%d",&n);
+        printf("Case %d: %d\n",j,fact[n].second);
+    }
 }

@@ -7,7 +7,8 @@
         "map": "cpp",
         "ostream": "cpp",
         "limits": "cpp",
-        "ratio": "cpp"
+        "ratio": "cpp",
+        "iostream": "cpp"
     },
     "C_Cpp.errorSquiggles": "enabled"
 }
