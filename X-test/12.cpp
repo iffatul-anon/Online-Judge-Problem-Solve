@@ -1,7 +1,8 @@
 #include<iostream>
+#include<algorithm>
 #include<vector>
 #include<map>
-#include<stdlib.h>
+#include<string.h>
 using namespace std;
 int main(){
     int t;
