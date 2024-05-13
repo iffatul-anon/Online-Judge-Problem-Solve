@@ -1,8 +1,4 @@
-#include<iostream>
-#include<algorithm>
-#include<vector>
-#include<map>
-using namespace std;
+#include<stdio.h>
 #define MAX 1000000007
 long long a[200005],seg[4*200005];
 void build(int ind,int low,int high){

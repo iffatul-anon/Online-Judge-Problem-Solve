@@ -1,8 +1,4 @@
-#include<iostream>
-#include<algorithm>
-#include<vector>
-#include<map>
-using namespace std;
+#include<stdio.h>
 long long a[200005],seg[4*200005],lazy[4*200005];
 void build(int ind, int low,int high){
     if(low==high){
@@ -54,13 +50,19 @@ long long query(int ind, int low, int high, int l, int r){
     return query(2*ind+1,low,mid,l,r)+query(2*ind+2,mid+1,high,l,r);
 }
 int main(){
-    int n,q,x,y,z;
+    int n,q,x,l,r,y;
     scanf("%d %d",&n,&q);
     for(int i=0;i<n;i++) scanf("%lld",&a[i]);
     build(0,0,n-1);
     for(int i=1;i<=q;i++){
-        scanf("%d %d %d",&x,&y,&z);
-        if(x==1) rangeupdate(0,0,n-1,y-1,z-1,u);
-        else printf("%lld\n",query(0,0,n-1,y-1,z-1));
+        scanf("%d",&x);
+        if(x==1) {
+            scanf("%d %d %d",&l,&r,&y);
+            rangeupdate(0,0,n-1,l-1,r-1,y);
+        }
+        else {
+            scanf("%d %d",&l,&r);
+            printf("%lld\n",query(0,0,n-1,l-1,r-1));
+        }
     }
 }

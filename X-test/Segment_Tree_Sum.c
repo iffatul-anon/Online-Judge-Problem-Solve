@@ -1,23 +1,14 @@
 #include<stdio.h>
-#include<math.h>
-long long a[200005],seg[4*200005],tem[200005];
+long long a[200005],seg[4*200005];
 void build(int ind, int low,int high){
     if(low==high){
         seg[ind]=a[low];
-        tem[ind]=1;
         return;
     }
     int mid=(low+high)/2;
     build(2*ind+1,low,mid);
     build(2*ind+2,mid+1,high);
-    if(tem[2*ind+1]) {
-        seg[ind]=seg[2*ind+1]|seg[2*ind+2];
-        tem[ind]=0;
-    }
-    else{
-        seg[ind]=seg[2*ind+1]^seg[2*ind+2];
-        tem[ind]=1;
-    }
+    seg[ind]=seg[2*ind+1]+seg[2*ind+2];
 }
 void update(int ind,int low,int high,int k,int u){
     if(low==high){
@@ -27,24 +18,22 @@ void update(int ind,int low,int high,int k,int u){
     int mid=(low+high)/2;
     if(k<=mid) update(2*ind+1,low,mid,k,u);
     else update(2*ind+2,mid+1,high,k,u);
-    if(tem[2*ind+1]) {
-        seg[ind]=seg[2*ind+1]|seg[2*ind+2];
-        tem[ind]=0;
-    }
-    else{
-        seg[ind]=seg[2*ind+1]^seg[2*ind+2];
-        tem[ind]=1;
-    }
+    seg[ind]=seg[2*ind+1]+seg[2*ind+2];
+}
+long long query(int ind, int low, int high, int l, int r){
+    if(low>=l && r>=high) return seg[ind];
+    if(low>r || l>high) return 0;
+    int mid=(low+high)/2;
+    return query(2*ind+1,low,mid,l,r)+query(2*ind+2,mid+1,high,l,r);
 }
 int main(){
-    int n,q,l,r;
+    int n,q,x,y,z;
     scanf("%d %d",&n,&q);
-    n=pow(2,n);
     for(int i=0;i<n;i++) scanf("%lld",&a[i]);
     build(0,0,n-1);
     for(int i=1;i<=q;i++){
-        scanf("%d %d",&l,&r);
-        update(0,0,n-1,l-1,r);
-        printf("%lld\n",seg[0]);
+        scanf("%d %d %d",&x,&y,&z);
+        if(x==1) update(0,0,n-1,y-1,z);
+        else printf("%lld\n",query(0,0,n-1,y-1,z-1));
     }
 }
