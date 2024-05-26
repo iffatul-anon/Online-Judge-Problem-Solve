@@ -1,11 +1,13 @@
 #include<iostream>
 #include<algorithm>
-#include<string.h>
-#include<math.h>
+#include<map>
+#include <utility>
+#include<vector>
+#define int long long
 using namespace std;
-int main(){
+signed main(){
     int t;
-    scanf("%d",&t);
+    scanf("%lld",&t);
     while(t--){
         
     }
