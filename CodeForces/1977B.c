@@ -6,8 +6,7 @@ int main(){
         int x,a[32]={0},y=0;
         scanf("%d",&x);
         while(x){
-            if(x&1) a[y]=1;
-            y++;
+            a[y++]=x%2;
             x/=2;
         }
         for(int i=0;i<31;i++){

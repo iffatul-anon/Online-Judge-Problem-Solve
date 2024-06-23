@@ -1,7 +1,9 @@
 #include<stdio.h>
-int main(){
+#include<stdlib.h>
+#define int long long
+signed main(){
     int t;
-    scanf("%d",&t);
+    scanf("%lld",&t);
     while(t--){
         
     }
