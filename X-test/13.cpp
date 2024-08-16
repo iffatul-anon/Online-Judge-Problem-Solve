@@ -1,4 +1,6 @@
 #include<iostream>
+#include<string.h>
+#include<math.h>
 #include<algorithm>
 #include<map>
 #include<vector>
@@ -10,5 +12,4 @@ signed main(){
     while(t--){
         
     }
-    
 }

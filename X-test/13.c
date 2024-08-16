@@ -1,5 +1,4 @@
 #include<stdio.h>
-#include<string.h>
 #define int long long
 signed main(){
     int t;
@@ -7,5 +6,4 @@ signed main(){
     while(t--){
         
     }
-    
 }
