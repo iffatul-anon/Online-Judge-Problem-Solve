@@ -1,9 +1,6 @@
 #include<iostream>
-#include<string.h>
-#include<math.h>
 #include<algorithm>
-#include<map>
-#include<vector>
+#include<set>
 #define int long long
 using namespace std;
 signed main(){
