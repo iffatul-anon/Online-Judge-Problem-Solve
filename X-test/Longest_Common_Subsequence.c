@@ -25,7 +25,7 @@ int main() {
             LCS_table[i][j] = LCS_table[i - 1][j - 1] + 1;
         } 
         else if (LCS_table[i - 1][j] >= LCS_table[i][j - 1]) {
-        LCS_table[i][j] = LCS_table[i - 1][j];
+            LCS_table[i][j] = LCS_table[i - 1][j];
         } 
         else {
             LCS_table[i][j] = LCS_table[i][j - 1];

@@ -6,13 +6,10 @@ using namespace std;
 const int N =2e5+10;
 vector<int> graph[N];
 bool vis[N];
-int mx=0,m;
-int a[N];
+int mx=0;
 void dfs(int vertex,int c){
-    if(a[vertex]) c++;
-    else c=0;
-    if(c>m) return;
-    if(graph[vertex].size()==1 && vertex!=1) mx++;
+    c++;
+    if(c>mx) mx=c;
     vis[vertex] = true;
     for(int child : graph[vertex]){
         if(vis[child]) continue;
@@ -21,14 +18,15 @@ void dfs(int vertex,int c){
     return;
 }
 signed main(){
-    int n,u,v;
-    scanf("%lld %lld",&n,&m);
-    for(int i=1;i<=n;i++) scanf("%lld",&a[i]);
-    for(int i=1;i<n;i++){
-        scanf("%lld %lld",&u,&v);
-        graph[u].push_back(v);
-        graph[v].push_back(u);
+    int n,u;
+    scanf("%lld",&n);
+    for(int i=1;i<=n;i++){
+        scanf("%lld",&u);
+        if(u!=-1) graph[u].push_back(i);
     }
-    dfs(1,0);
+    for(int i=1;i<=n;i++){
+        for(int j=1;j<=n;j++) vis[j]=0;
+        dfs(i,0);
+    }
     printf("%lld\n",mx);
 }
