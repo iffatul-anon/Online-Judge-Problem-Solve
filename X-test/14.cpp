@@ -7,5 +7,6 @@ signed main(){
     scanf("%d",&t);
     while(t--){
         
+        
     }
 }
