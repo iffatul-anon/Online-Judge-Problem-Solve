@@ -1,7 +1,9 @@
 #include<iostream>
 #include<algorithm>
-#define int long long
+#include<vector>
+#include<string>
 using namespace std;
+
 signed main(){
     
 }

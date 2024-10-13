@@ -6,7 +6,7 @@ using namespace std;
 
 typedef long long ll;
 
-const int N = 1000010;
+const int N = 2000010;
 const int MOD = 1e9 + 7;
 const ll P[] = {97, 1000003};
 
@@ -66,43 +66,31 @@ struct RangeHash {
   }
 };
 
-bool compare_part(RangeHash& machine, int i,int n,int mid){
-  int x=mid/2;
-  if(mid%2){
-    if(i-x<0 || i+x>=n) return false;
-    if(machine.getReverse(i-x,i)==machine.get(i,i+x)) return true;
-    else return false;
-  }
-  else{
-    if(i-(x-1)<0 || i+x>=n) return false;
-    if(machine.getReverse(i-(x-1),i)==machine.get(i+1,i+x)) return true;
-    else return false;
-  }
-}
-
 signed main(){
   initHash();
   string s; 
   cin >> s;
-  int len = s.size(),x=0,y=0,maxi=0;
+  int len = s.size(),x=0;
+  s+=s;
   RangeHash machine(s);
-  for(int i=1;i<len-1;i++){
-      int l=1,r=len;
+  for(int i=0;i<len;i++){
+    if(s[i]!=s[x]){
+      if(s[i]<s[x]) x=i;
+    }
+    else if(machine.get(i,i+len-1)!=machine.get(x,x+len-1)){
+      int l=0,r=len-1;
       while(l<=r){
         int mid=(l+r)/2;
-        if(compare_part(machine,i,len,mid)){
+        if(machine.get(i,i+mid-1)==machine.get(x,x+mid-1)){
           l=mid+1;
         }
         else{
           r=mid-1;
         }
       }
-      if(r>maxi){
-        maxi=r;
-        x=i-(r/2);
-      }
+      if(s[i+r]<s[x+r]) x=i;
+    }
   }
-  if(maxi==0) maxi++;
-  string s2=s.substr(x,maxi);
-  cout<<s2<<endl;
+  s=s.substr(x,len);
+  cout<<s<<endl;
 }

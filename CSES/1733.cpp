@@ -66,43 +66,33 @@ struct RangeHash {
   }
 };
 
-bool compare_part(RangeHash& machine, int i,int n,int mid){
-  int x=mid/2;
-  if(mid%2){
-    if(i-x<0 || i+x>=n) return false;
-    if(machine.getReverse(i-x,i)==machine.get(i,i+x)) return true;
-    else return false;
-  }
-  else{
-    if(i-(x-1)<0 || i+x>=n) return false;
-    if(machine.getReverse(i-(x-1),i)==machine.get(i+1,i+x)) return true;
-    else return false;
-  }
-}
-
 signed main(){
   initHash();
   string s; 
   cin >> s;
-  int len = s.size(),x=0,y=0,maxi=0;
+  int n=s.size();
   RangeHash machine(s);
-  for(int i=1;i<len-1;i++){
-      int l=1,r=len;
-      while(l<=r){
-        int mid=(l+r)/2;
-        if(compare_part(machine,i,len,mid)){
-          l=mid+1;
+  int x,y,f;
+  for(int i=1;i<=n;i++){
+    f=0;
+    x=machine.get(0,i-1);
+    for(int j=0;j<n;j+=i){
+      if(j+i>n){
+        x=machine.get(0,n-j-1);
+        y=machine.get(j,n-1);
+        if(x!=y){
+          f=1;
+          break;
         }
-        else{
-          r=mid-1;
-        }
+        break;
       }
-      if(r>maxi){
-        maxi=r;
-        x=i-(r/2);
+      y=machine.get(j,j+i-1);
+      if(x!=y){
+        f=1;
+        break;
       }
+    }
+    if(f==0) cout<<i<<" ";
   }
-  if(maxi==0) maxi++;
-  string s2=s.substr(x,maxi);
-  cout<<s2<<endl;
+  cout<<endl;
 }

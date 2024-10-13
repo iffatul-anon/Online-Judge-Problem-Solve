@@ -6,7 +6,7 @@ using namespace std;
 
 typedef long long ll;
 
-const int N = 1000010;
+const int N = 2000010;
 const int MOD = 1e9 + 7;
 const ll P[] = {97, 1000003};
 
@@ -66,43 +66,27 @@ struct RangeHash {
   }
 };
 
-bool compare_part(RangeHash& machine, int i,int n,int mid){
-  int x=mid/2;
-  if(mid%2){
-    if(i-x<0 || i+x>=n) return false;
-    if(machine.getReverse(i-x,i)==machine.get(i,i+x)) return true;
-    else return false;
-  }
-  else{
-    if(i-(x-1)<0 || i+x>=n) return false;
-    if(machine.getReverse(i-(x-1),i)==machine.get(i+1,i+x)) return true;
-    else return false;
-  }
-}
-
 signed main(){
   initHash();
-  string s; 
-  cin >> s;
-  int len = s.size(),x=0,y=0,maxi=0;
-  RangeHash machine(s);
-  for(int i=1;i<len-1;i++){
-      int l=1,r=len;
-      while(l<=r){
-        int mid=(l+r)/2;
-        if(compare_part(machine,i,len,mid)){
-          l=mid+1;
-        }
-        else{
-          r=mid-1;
-        }
-      }
-      if(r>maxi){
-        maxi=r;
-        x=i-(r/2);
-      }
-  }
-  if(maxi==0) maxi++;
-  string s2=s.substr(x,maxi);
-  cout<<s2<<endl;
+  ll n,w;
+  cin >> n >> w;
+  vector<ll>a(n),b(w);
+  for(int i=0;i<n;i++) cin >> a[i];
+  for(int i=0;i<w;i++) cin >> b[i];
+  if(n<w) cout <<"0\n";
+  else if(w==1) cout << n <<"\n";
+  else{
+    ll ans = 0,ok,MOD2=999999937;
+    string s1,s2;
+    for(int i=1;i<n;i++) s1+=to_string((a[i]-a[i-1]+MOD2)%MOD2);
+    for(int i=1;i<w;i++) s2+=to_string((b[i]-b[i-1]+MOD2)%MOD2);
+    RangeHash machine1(s1);
+    RangeHash machine2(s2);
+    ll l1=s1.size(),l2=s2.size();
+    ok=machine2.get(0,l2-1);
+    for(int i=0;i<=l1-l2;i++) {
+      if(ok==machine1.get(i,i+l2-1)) ans++;
+    }
+    cout << ans << '\n';
+  } 
 }
