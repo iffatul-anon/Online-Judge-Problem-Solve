@@ -70,7 +70,33 @@ signed main(){
   initHash();
   string s; 
   cin >> s;
-  int len = s.size();
+  int len = s.size(),x=0,y=0,maxi=0;
   RangeHash machine(s,1);
-  
+  for(int i=0;i<len;i++){
+    int ans=0;
+      int l=1,r=min(i,len-i-1);
+      while(l<=r){
+        int mid=(l+r)/2;
+        if(machine.get(i-mid,i)==machine.getReverse(i,i+mid)) l=mid+1;
+        else r=mid-1;
+      }
+      r=r+r+1;
+      if(r>maxi){
+        maxi=r;
+        x=i-(r/2);
+      }
+      l=1,r=min(i+1,len-i-1);
+      while(l<=r){
+        int mid=(l+r)/2;
+        if(machine.get(i-mid+1,i)==machine.getReverse(i+1,i+mid)) l=mid+1;
+        else r=mid-1;
+      }
+      r=r+r;
+      if(r>maxi){
+        maxi=r;
+        x=i-(r/2)+1;
+      }
+  }
+  string s2=s.substr(x,maxi);
+  cout<<s2<<endl;
 }
