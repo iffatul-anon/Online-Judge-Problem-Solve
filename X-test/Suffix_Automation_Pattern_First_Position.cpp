@@ -9,11 +9,8 @@ using namespace std;
 
 const int N = 1e5 + 5;
 
-int len[2*N], lnk[2*N], last, sz = 1;
+int len[2*N], lnk[2*N], last, sz = 1, lastPos[2 * N];
 unordered_map < char, int > to[2*N];
-
-vector<int> nodes[2 * N];
-long long cnt[2 * N], dp[2 * N];
 
 void init() {
     while (sz) {
@@ -25,7 +22,7 @@ void init() {
 void add(char c) {
     int cur = sz++;
     len[cur] = len[last] + 1;
-    cnt[cur] = 1;
+    lastPos[cur] = len[cur];
     int u = last;
     while (u != -1 and!to[u].count(c)) {
         to[u][c] = cur;
@@ -41,7 +38,10 @@ void add(char c) {
         }
         else {
             int w = sz++;
-            len[w] = len[u] + 1, lnk[w] = lnk[v], to[w] = to[v];
+            len[w] = len[u] + 1;
+            lnk[w] = lnk[v];
+            to[w] = to[v];
+            lastPos[w] = lastPos[v];
             while (u != -1 and to[u][c] == v) {
                 to[u][c] = w;
                 u = lnk[u];
@@ -52,31 +52,6 @@ void add(char c) {
     last = cur;
 }
 
-//dp te all substring count
-//cnt te substring occurence count
-void all_substr() {
-  for (int u = 0; u < sz; ++u) {
-    nodes[len[u]].emplace_back(u);
-  }
-  for (int l = sz - 1; l > 0; --l) {
-    for (auto u: nodes[l]) {
-      cnt[lnk[u]] += cnt[u];
-    }
-  }
- 
-  for (int u = 1; u < sz; ++u) {
-    dp[u] = cnt[u];
-  }
- 
-  for (int l = sz - 1; l >= 0; --l) {
-    for (auto u: nodes[l]) {
-      for (auto [c, v]: to[u]) {
-        dp[u] += dp[v];
-      }
-    }
-  }
-}
-
 signed main() {
     // init();
     memset(lnk, -1, sizeof lnk);
@@ -85,6 +60,23 @@ signed main() {
     for (char c: s) {
         add(c);
     }
-    all_substr();
-    cout<<dp[0]<<endl;
+    int k;
+    cin >> k;
+    while(k--){
+        string p;
+        cin >> p;
+        int cur = 0,f=1;
+        for(int i=0;i<p.size();i++){
+            if(to[cur][p[i]]){
+                cur = to[cur][p[i]];
+            }
+            else{
+                f=0;
+                break;
+            }
+        }
+        if(f) cout << lastPos[cur] - p.size() + 1 << "\n";
+        else cout << "-1\n";
+    }
+
 }
