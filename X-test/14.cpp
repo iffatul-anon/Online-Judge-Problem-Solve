@@ -1,23 +1,12 @@
 #include <iostream>
-#include <string>
 #include <algorithm>
+#include <string>
 #include <vector>
 #include <map>
-#include <set>
-#include <cmath>
-#include <queue>
-#include <tuple>
-#include <cassert>
-#include <bitset>
-#include <iomanip>
-#include <cctype>
+#include <unordered_map>
+#include <cstring>
 using namespace std;
-#define int long long
-signed main(){
-    int t;
-    scanf("%lld",&t);
-    while(t--){
-        
-        
-    }
+
+signed main() {
+    
 }
