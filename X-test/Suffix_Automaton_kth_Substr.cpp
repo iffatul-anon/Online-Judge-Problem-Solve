@@ -14,6 +14,9 @@ unordered_map < char, int > to[2*N];
 
 vector<int> nodes[2 * N];
 long long cnt[2 * N], dp[2 * N], dp2[2*N];
+//cnt te substring occurence count
+//dp te all substring count
+//dp2 te distinct substring count
 
 void init() {
     while (sz) {
@@ -52,12 +55,11 @@ void add(char c) {
     cnt[cur] = 1;
 }
 
-//dp te all substring count
-//cnt te substring occurence count
 void all_substr() {
   for (int u = 0; u < sz; ++u) {
     nodes[len[u]].emplace_back(u);
   }
+
   for (int l = sz - 1; l > 0; --l) {
     for (auto u: nodes[l]) {
       cnt[lnk[u]] += cnt[u];
@@ -77,16 +79,22 @@ void all_substr() {
   }
 }
 
-//dp2 te distinct substring count
-long long distint_substr(int cur) {
-    if (dp2[cur]) return dp2[cur];
-    long long sum = 1;
-    for (auto[c, x]: to[cur]) {
-        if (to[cur][c]) {
-            sum += distint_substr(to[cur][c]);
-        }
+void distinct_substr() {
+  for (int u = 0; u < sz; ++u) {
+    nodes[len[u]].emplace_back(u);
+  }
+
+  for (int u = 1; u < sz; ++u) {
+    dp2[u] = 1;
+  }
+ 
+  for (int l = sz - 1; l >= 0; --l) {
+    for (auto u: nodes[l]) {
+      for (auto [c, v]: to[u]) {
+        dp2[u] += dp2[v];
+      }
     }
-    return dp2[cur] = sum;
+  }
 }
 
 signed main() {
@@ -97,11 +105,12 @@ signed main() {
     for (char c: s) {
         add(c);
     }
+
     all_substr();
     // cout << dp[0] << endl;
     
-    // distint_substr(0);
-    // cout << dp2[0] - 1 << endl;
+    // distinct_substr();
+    // cout << dp2[0]  << endl;
 
     long long k,n=s.size();
     cin>>k;
@@ -109,6 +118,7 @@ signed main() {
         cout<<"No such line.\n";
         return 0;
     }
+    
     string s2="";
     long long cur=0,sum=0;
     while(sum<k){
@@ -123,6 +133,7 @@ signed main() {
             if(to[cur][c] && sum+dp[to[cur][c]]<k) {
                 sum+=dp[to[cur][c]];
             }
+
             else if(to[cur][c]) {
                 s2+=c;
 

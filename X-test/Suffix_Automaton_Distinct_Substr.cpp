@@ -12,6 +12,7 @@ const int N = 1e5 + 5;
 int len[2*N], lnk[2*N], last, sz = 1;
 unordered_map < char, int > to[2*N];
 
+vector<int> nodes[2 * N];
 long long dp2[2*N];
 
 void init() {
@@ -50,15 +51,22 @@ void add(char c) {
     last = cur;
 }
 
-long long distint_substr(int cur) {
-    if (dp2[cur]) return dp2[cur];
-    long long sum = 1;
-    for (auto[c, x]: to[cur]) {
-        if (to[cur][c]) {
-            sum += distint_substr(to[cur][c]);
-        }
+void distinct_substr() {
+  for (int u = 0; u < sz; ++u) {
+    nodes[len[u]].emplace_back(u);
+  }
+
+  for (int u = 1; u < sz; ++u) {
+    dp2[u] = 1;
+  }
+ 
+  for (int l = sz - 1; l >= 0; --l) {
+    for (auto u: nodes[l]) {
+      for (auto [c, v]: to[u]) {
+        dp2[u] += dp2[v];
+      }
     }
-    return dp2[cur] = sum;
+  }
 }
 
 signed main() {
@@ -69,7 +77,7 @@ signed main() {
     for (char c: s) {
         add(c);
     }
-    distint_substr(0);
-    cout << dp2[0] - 1 << endl;
+    distinct_substr();
+    cout << dp2[0] << endl;
 
 }
