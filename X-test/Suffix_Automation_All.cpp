@@ -16,10 +16,9 @@ unordered_map < char, int > to[2 * N];
 // last te full string position
 
 vector < int > nodes[2 * N];
-long long cnt[2 * N], dp[2 * N], dp2[2 * N];
+long long cnt[2 * N], dp[2 * N];
 //cnt te occurrence count for each substring represented by a state
 //dp te all substring count
-//dp2 te distinct substring count
 
 void init() {
     memset(len, 0, sizeof(len));
@@ -27,7 +26,6 @@ void init() {
     memset(lastPos, 0, sizeof(lastPos));
     memset(cnt, 0, sizeof(cnt));
     memset(dp, 0, sizeof(dp));
-    memset(dp2, 0, sizeof(dp2));
     for (int i = 0; i < sz; i++) {
         to[i].clear();
         nodes[i].clear();
@@ -83,7 +81,8 @@ void count() {
 
 void all_substr() {
     for (int u = 1; u < sz; ++u) {
-        dp[u] = cnt[u];
+        dp[u] = cnt[u]; // all substring count
+        // dp[u] = 1; // distinct substring count
     }
     for (int l = sz - 1; l >= 0; --l) {
         for (auto u: nodes[l]) {
@@ -92,39 +91,6 @@ void all_substr() {
             }
         }
     }
-}
-
-void distinct_substr() {
-    for (int u = 1; u < sz; ++u) {
-        dp2[u] = 1;
-    }
-    for (int l = sz - 1; l >= 0; --l) {
-        for (auto u: nodes[l]) {
-            for (auto[c, v]: to[u]) {
-                dp2[u] += dp2[v];
-            }
-        }
-    }
-}
-
-long long substr_occurrence_count(string p) {
-    int cur = 0, f = 1;
-    for (int i = 0; i < p.size(); i++) {
-        if (to[cur][p[i]]) {
-            cur = to[cur][p[i]];
-        }
-        else return -1;
-    }
-    return cnt[cur];
-}
-
-long long pattern_first_occurance_position(string p) {
-    int cur = 0, f = 1;
-    for (int i = 0; i < p.size(); i++) {
-        if (to[cur][p[i]]) cur = to[cur][p[i]];
-        else return -1;
-    }
-    return lastPos[cur] - p.size() + 1;
 }
 
 string kth_substr(long long k) {
@@ -137,7 +103,8 @@ string kth_substr(long long k) {
             }
             else if (to[cur][c]) {
                 s2 += c;
-                sum += cnt[to[cur][c]];
+                sum += cnt[to[cur][c]]; // all substring count
+                // sum += 1; // distinct substring count
                 cur = to[cur][c];
                 break;
             }
@@ -146,48 +113,42 @@ string kth_substr(long long k) {
     return s2;
 }
 
-string kth_distinct_substr(long long k) {
-    string s2 = "";
-    long long cur = 0, sum = 0;
-    while (sum < k) {
-        for (char c = 'a'; c <= 'z'; c++) {
-            if (to[cur][c] && sum + dp2[to[cur][c]] < k) {
-                sum += dp2[to[cur][c]];
-            }
-            else if (to[cur][c]) {
-                s2 += c;
-                sum += 1;
-                cur = to[cur][c];
-                break;
-            }
-        }
+long long substr_occurrence_count(string p) {
+    int cur = 0;
+    for (int i = 0; i < p.size(); i++) {
+        if (to[cur][p[i]]) cur = to[cur][p[i]];
+        else return -1;
     }
-    return s2;
+    return cnt[cur];
+}
+
+long long substr_first_occurance_position(string p) {
+    int cur = 0;
+    for (int i = 0; i < p.size(); i++) {
+        if (to[cur][p[i]]) cur = to[cur][p[i]];
+        else return -1;
+    }
+    return lastPos[cur] - p.size() + 1;
 }
 
 signed main() {
     init();
-    count();
     string s;
     cin >> s;
     for (char c: s) {
         add(c);
     }
+    count();
 
     long long k;
     cin >> k;
-
     all_substr();
     cout << dp[0] << endl;
     cout << kth_substr(k) << endl;
 
-    distinct_substr();
-    cout << dp2[0] << endl;
-    cout << kth_distinct_substr(k) << endl;
-
     string p;
     cin >> p;
     cout << substr_occurrence_count(p) << endl;
-    cout << pattern_first_occurance_position(p) << endl;
+    cout << substr_first_occurance_position(p) << endl;
 
 }
