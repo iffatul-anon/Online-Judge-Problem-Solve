@@ -18,7 +18,7 @@ unordered_map < char, int > to[2 * N];
 vector < int > nodes[2 * N];
 long long cnt[2 * N], dp[2 * N];
 //cnt te occurrence count for each substring represented by a state
-//dp te all substring count
+//dp te all or distinct substring count
 
 void init() {
     memset(len, 0, sizeof(len));
